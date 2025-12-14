@@ -1,0 +1,400 @@
+/* ============================================================
+ОСНОВНЫЕ СТИЛИ СТРАНИЦЫ
+============================================================ */
+
+/* .page — основной контейнер всей страницы */
+.page {
+  min-inline-size: 320px;                               /* Минимальная ширина: 320px */
+  min-block-size: 100dvb;                               /* Минимальная высота: 100% видимой области */
+  font-family: var(--font-main, Inter-Varible), sans-serif; /* Шрифт по умолчанию Inter */
+  font-size: 18px;                                      /* Размер текста по умолчанию */
+  line-height: 1;                                       /* Высота строки */
+  font-variation-settings: 'wght' var(--base-weight, 400); /* Толщина шрифта (вес) */
+  background-color: var(--bg-color, #fff);              /* Цвет фона */
+  color: var(--text-color, #000);                       /* Цвет текста */
+  padding-block-end: 100px;                             /* Отступ снизу страницы */
+}
+
+/* ============================================================
+СТИЛИ ЗАГОЛОВКА
+============================================================ */
+
+/* .header — контейнер заголовка */
+.page {
+  display: flex;
+}
+
+/* .header__window — окно заголовка (белый прямоугольник с текстом) */
+.header__window {
+  display: flex;
+  flex-direction: column;                               /* Элементы выстраиваются в колонку */
+  justify-content: center;                              /* Центрируем по вертикали */
+  align-items: center;                                  /* Центрируем по горизонтали */
+  gap: 20px;                                            /* Расстояние между элементами */
+  inline-size: clamp(23.4375rem, 16.2852rem + 30.5164vw, 43.75rem); /* Адаптивная ширина */
+  block-size: clamp(20.4375rem, 19.5352rem + 3.8498vw, 23rem);     /* Адаптивная высота */
+  margin: 100px auto;                                   /* Отступы и центрирование */
+  font-family: var(--font-accent, PressStart2P), sans-serif; /* Шрифт для заголовка */
+  font-weight: var(--base-weight, 400);                 /* Толщина шрифта */
+  border: var(--border, 1px solid #000);                /* Чёрная граница */
+  background-color: #fff;                               /* Белый фон */
+}
+
+/* header::before — фоновый эффект сетки позади заголовка */
+header::before {
+  content: '';
+  position: absolute;                                   /* Псевдоэлемент позволяет расположить позади */
+  block-size: clamp(41.6875rem, 35.2394rem + 27.5117vw, 60rem); /* Адаптивная высота */
+  inset: 0;                                             /* Занимает всё пространство */
+  z-index: -1;                                          /* Находится позади других элементов */
+  
+  /* Три наложенных слоя для эффекта "сетки" и градиента */
+  background-image:
+    repeating-linear-gradient(
+      90deg,                                            /* Вертикальные линии */
+      #d3d3d3 0,
+      #d3d3d3 2px,
+      transparent 2px,
+      transparent 4px
+    ),
+    repeating-linear-gradient(
+      0deg,                                             /* Горизонтальные линии */
+      #d3d3d3 0,
+      #d3d3d3 2px,
+      transparent 2px,
+      transparent 4px
+    ),
+    linear-gradient(to bottom, #e7e7e7 0.01%, #1a1a1a); /* Градиент от светлого к чёрному */
+  background-size: cover;
+}
+
+/* .header__title — заголовок первого уровня "</HTML>" */
+.header__title {
+  font-size: clamp(3.0625rem, 2.7104rem + 1.5023vw, 4.0625rem); /* Адаптивный размер текста */
+}
+
+/* .header__subtitle — подзаголовок "Закрывающий тег" */
+.header__subtitle {
+  font-size: clamp(0.875rem, 0.6769rem + 0.8451vw, 1.4375rem); /* Адаптивный размер */
+  text-transform: uppercase;                            /* Преобразуем текст в прописные буквы */
+}
+
+/* ============================================================
+СТИЛИ КАРТОЧЕК
+============================================================ */
+
+/* .cards — контейнер для всех карточек */
+.cards {
+  display: flex;
+  flex-direction: column;                               /* Карточки расположены вертикально */
+  align-items: center;                                  /* Центрируем карточки по горизонтали */
+  gap: 50px;                                            /* Расстояние между карточками */
+}
+
+/* .card — отдельная карточка (статья) */
+.card {
+  inline-size: clamp(23.1875rem, 16.0352rem + 30.5164vw, 43.5rem); /* Адаптивная ширина */
+  display: flex;
+  flex-direction: column;                               /* Содержимое в колонку */
+  justify-content: center;                              /* Центрируем содержимое */
+  border: var(--border, 1px solid #000);                /* Чёрная граница вокруг карточки */
+  background-color: var(--bg-color, #fff);              /* Белый фон */
+}
+
+/* .card__title — заголовок карточки */
+.card__title {
+  padding: 7px 10px;                                    /* Внутренние отступы */
+  font-size: 18px;
+  line-height: 22px;
+  font-variation-settings: 'wght' var(--heading-weight, 700); /* Жирный текст */
+  border: var(--border, 1px solid #000);                /* Граница между заголовком и содержимым */
+}
+
+/* .card__text — основной текст карточки */
+.card__text {
+  padding: 25px;
+  line-height: 21px;
+  text-wrap: wrap;                                      /* Текст переносится на новые строки */
+}
+
+/* .card__image-container — контейнер для изображения (позволяет разместить текст поверх) */
+.card__image-container {
+  position: relative;                                   /* Нужен для абсолютного позиционирования текста */
+}
+
+/* .img-text — текст, расположенный поверх изображения */
+.img-text {
+  position: absolute;                                   /* Размещаем поверх изображения */
+  top: 25px;                                            /* Отступ сверху */
+  right: clamp(0.6875rem, -0.4063rem + 3.5vw, 1.5625rem); /* Адаптивный отступ справа */
+  font-family: var(--font-accent, PressStart2P), sans-serif; /* Стиль как в заголовке */
+  font-size: 14px;
+  color: rgb(0 0 0 / 0.5);                              /* Полупрозрачный чёрный текст */
+  text-shadow:
+    -1px 0 var(--text-stroke-color, rgb(255 255 255 / 0.5)),
+    0 1px var(--text-stroke-color, rgb(255 255 255 / 0.5)),
+    1px 0 var(--text-stroke-color, rgb(255 255 255 / 0.5)),
+    0 -1px var(--text-stroke-color, rgb(255 255 255 / 0.5)); /* Белая обводка текста */
+  mix-blend-mode: hard-light;                           /* Режим смешивания цветов */
+}
+
+/* Если браузер поддерживает text-stroke (обводку текста) */
+@supports (
+  (text-stroke: 1px var(--text-stroke-color, rgb(255 255 255 / 0.5))) or
+    (-webkit-text-stroke: 1px #000000)
+) {
+  .img-text {
+    -webkit-text-stroke: 1px var(--text-stroke-color, rgb(255 255 255 / 0.5)); /* Для webkit браузеров */
+    text-stroke: 1px var(--text-stroke-color, rgb(255 255 255 / 0.5));        /* Стандартный синтаксис */
+    text-shadow: none;                                  /* Убираем text-shadow если есть text-stroke */
+  }
+}
+
+/* ============================================================
+ФИЛЬТРЫ ДЛЯ ИЗОБРАЖЕНИЙ КАРТОЧЕК
+Каждая карточка имеет свой визуальный эффект
+============================================================ */
+
+/* Карточка 1: Снижение яркости */
+.first-image {
+  filter: brightness(0.5);
+}
+
+/* Карточка 2: Размытие */
+.second-image {
+  filter: blur(3px);
+}
+
+/* Карточка 3: Инверсия цветов */
+.third-image {
+  filter: invert(1);
+}
+
+/* Карточка 4: Поворот оттенка на 180 градусов */
+.fourth-image {
+  filter: hue-rotate(180deg);
+}
+
+/* Карточка 5: Сепия (коричневый оттенок) */
+.fifth-image {
+  filter: sepia(1);
+}
+
+/* Карточка 6: Чёрно-белое изображение */
+.sixth-image {
+  filter: grayscale(1);
+}
+
+/* Карточка 7: Комбинированные эффекты */
+.seventh-image {
+  filter: contrast(2) saturate(2) opacity(0.9) brightness(1.5);
+}
+
+/* ============================================================
+СТИЛИ КНОПОК И ЭЛЕМЕНТОВ ВЗАИМОДЕЙСТВИЯ
+============================================================ */
+
+/* .info — блок информационного текста */
+.info {
+  margin-block-end: 27px;                               /* Отступ снизу перед следующим элементом */
+}
+
+/* .card__like-button — кнопка "Like" */
+.card__like-button {
+  inline-size: 130px;                                   /* Ширина кнопки */
+  block-size: 38px;                                     /* Высота кнопки */
+}
+
+/* Общие стили для всех кнопок (Like, Save и Close dialog) */
+.card__like-button,
+.save-button,
+.button__close-dialog {
+  position: relative;                                   /* Нужен для ::after псевдоэлемента */
+  padding-block: 12.5px;                                /* Внутренние отступы сверху-снизу */
+  margin: auto;                                         /* Центрирование */
+  background-color: var(--bg-color, #fff);              /* Белый фон */
+  border: none;                                         /* Без границ */
+  outline: var(--border, 1px solid #000);               /* Чёрная обводка вместо border */
+  font-family: var(--font-accent, PressStart2P), sans-serif; /* Специальный шрифт */
+  font-size: 14px;
+  font-weight: var(--base-weight, 400);
+  line-height: 0.9;
+}
+
+/* Фокус клавиатуры — тень для доступности */
+.card__like-button:focus-visible,
+.save-button:focus-visible,
+.button__close-dialog:focus-visible {
+  box-shadow: 2px 2px 0 0 var(--accent-color, #000);
+  transition: box-shadow 0.3s ease;
+}
+
+/* Текст и иконки внутри кнопок */
+.button__text,
+.save-button__text,
+.save-icon {
+  color: var(--hover-button-text-color, #fff);         /* Белый текст при наведении */
+  fill: var(--hover-button-text-color, #fff);          /* Белый цвет для SVG иконок */
+  mix-blend-mode: difference;                           /* Текст становится контрастным при наведении */
+  position: relative;
+  z-index: 2;                                           /* Текст выше фонового слоя */
+}
+
+/* Фоновый слой для эффекта "раскрытия" при наведении */
+.card__like-button::after,
+.save-button::after,
+.button__close-dialog::after {
+  content: '';
+  position: absolute;                                   /* Создаём прямоугольник позади текста */
+  inset: 0;                                             /* Занимает всё пространство кнопки */
+  block-size: 100%;
+  transform-origin: 0 0;                                /* Точка отсчёта для трансформации */
+  transform: scaleX(0);                                 /* Изначально скрыт (ширина 0) */
+  background-color: var(--accent-color, #000);         /* Чёрный фон */
+  transition: transform 0.5s ease-in-out;
+  z-index: 1;                                           /* Позади текста */
+}
+
+/* При наведении мыши фон раскрывается (от левого края к правому) */
+.card__like-button:hover::after,
+.save-button:hover::after,
+.button__close-dialog:hover::after {
+  transform: scaleX(1);                                 /* Раскрываем на полную ширину */
+}
+
+/* .card__button — контейнер для иконки и кнопки Like */
+.card__button:has(.card__like-button) {
+  display: flex;
+  gap: 12px;                                            /* Расстояние между иконкой и кнопкой */
+  align-items: center;                                  /* Выравниваем по центру по вертикали */
+  align-self: flex-end;                                 /* Размещаем справа */
+  margin: 0 25px 25px 0;                                /* Отступы от края карточки */
+}
+
+/* .card__icon-button — кнопка с иконкой сердца */
+.card__icon-button {
+  border: none;
+  background-color: transparent;                       /* Прозрачный фон */
+  transition: border 0.3s ease;
+  padding: 0;
+}
+
+/* Убираем стандартный фокус */
+.card__icon-button:focus {
+  outline: none;
+}
+
+/* Добавляем видимый фокус для доступности */
+.card__icon-button:focus-visible {
+  outline: var(--border, 1px solid #000);
+}
+
+/* ============================================================
+СТИЛИ ДИАЛОГОВОГО ОКНА И КНОПКИ СОХРАНЕНИЯ
+============================================================ */
+
+/* .save — контейнер для кнопки сохранения */
+.save {
+  display: flex;
+  margin-block-start: 50px;                             /* Отступ сверху */
+}
+
+/* Контейнер кнопки закрытия диалога */
+.dialog__button:has(.save-button) {
+  margin: auto;
+}
+
+/* .save-button — кнопка сохранения */
+.save-button {
+  display: flex;
+  gap: 8px;                                             /* Расстояние между иконкой и текстом */
+  justify-content: center;
+  align-items: center;
+  padding: 15px 21px;
+}
+
+/* .save-icon — иконка дискеты (сохранения) */
+.save-icon {
+  inline-size: 21px;
+  block-size: 21px;
+}
+
+/* dialog — модальное окно (всплывающее окно) */
+dialog {
+  display: grid;
+  grid-template-areas:
+    'icon text'                                         /* Верхняя строка: иконка и текст */
+    'button button';                                    /* Нижняя строка: кнопка на всю ширину */
+  place-items: center;
+  row-gap: 30px;
+  column-gap: 20px;
+  inline-size: clamp(21.3125rem, 21.0484rem + 1.1268vw, 22.0625rem); /* Адаптивная ширина */
+  padding: 30px;
+  font-family: var(--font-accent, PressStart2P), sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* Скрываем диалог, если он не открыт */
+dialog:not([open]) {
+  display: none;
+}
+
+/* .dialog__text — текст внутри диалога */
+.dialog__text {
+  grid-area: text;
+}
+
+/* .dialog__icon — иконка внутри диалога */
+.dialog__icon {
+  grid-area: icon;
+  inline-size: 39px;
+  block-size: 39px;
+}
+
+/* .button__close-dialog — кнопка закрытия диалога */
+.button__close-dialog {
+  grid-area: button;
+  inline-size: 100%;
+}
+
+/* dialog::backdrop — полупрозрачный фон позади диалога */
+dialog::backdrop {
+  background-color: rgb(0 0 0 / 0.75);                  /* Чёрный фон с 75% прозрачностью */
+}
+
+/* ============================================================
+АДАПТИВНЫЙ ДИЗАЙН ДЛЯ МОБИЛЬНЫХ УСТРОЙСТВ
+============================================================ */
+
+@media (width < 376px) {
+
+  /* На очень узких экранах карточка занимает всю ширину */
+  .card {
+    inline-size: 100%;
+  }
+
+  /* Уменьшаем отступы в заголовке карточки */
+  .card__title {
+    padding: 5px 10px;
+  }
+
+  /* Ограничиваем ширину текста для нулевой карточки */
+  .card-zeroth .info {
+    max-inline-size: 310px;
+  }
+
+  /* На мобильных кнопка Save отображается в колонку */
+  .save-button__text {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: center;
+  }
+
+  /* Увеличиваем иконку на мобильных */
+  .save-icon {
+    inline-size: 28px;
+    block-size: 28px;
+  }
+}

@@ -1,0 +1,198 @@
+/* ============================================================
+ГЛОБАЛЬНЫЕ СТИЛИ (RESET И БАЗОВЫЕ НАСТРОЙКИ)
+============================================================
+
+Этот файл переопределяет стили браузера по умолчанию
+и устанавливает единообразные базовые стили для всех элементов.
+Это обеспечивает одинаковое отображение на разных браузерах.
+============================================================ */
+
+/* МОДЕЛЬ БЛОКА
+   Устанавливаем border-box для всех элементов
+   Включает padding и border в ширину/высоту элемента */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* СПИСКИ
+   Убираем левый отступ (padding) у списков с классом */
+:where(ul, ol):where([class]) {
+  padding-left: 0;
+}
+
+/* ОТСТУПЫ
+   Убираем все margin у body и элементов blockquote, figure с классом */
+body,
+:where(blockquote, figure):where([class]) {
+  margin: 0;
+}
+
+/* Убираем отступы у заголовков и других элементов */
+:where(h1, h2, h3, h4, h5, h6, p, ul, ol, dl):where([class]) {
+  margin-block: 0;
+}
+
+/* Убираем левый отступ у элементов dt (элементов списка определений) */
+:where(dd[class]) {
+  margin-left: 0;
+}
+
+/* ФОРМЫ
+   Убираем стили fieldset (группировка элементов формы) */
+:where(fieldset[class]) {
+  margin-left: 0;
+  padding: 0;
+  border: none;
+}
+
+/* ВИЗУАЛЬНЫЕ СПИСКИ
+   Убираем маркеры списков для списков с классом */
+:where(ul[class]) {
+  list-style: none;
+}
+
+/* АДРЕСА
+   Делаем текст адреса обычным (не курсив) */
+:where(address[class]) {
+  font-style: normal;
+}
+
+/* АБЗАЦЫ
+   Устанавливаем переменную для отступа снизу параграфа */
+p {
+  --paragraphMarginBottom: 24px;
+  margin-block: 0;
+}
+
+/* Добавляем отступ снизу у параграфов без класса (кроме последнего) */
+p:where(:not([class]):not(:last-child)) {
+  margin-bottom: var(--paragraphMarginBottom);
+}
+
+/* ИЗОБРАЖЕНИЯ И ВИДЕО
+   Делаем медиа элементы блочными и отзывчивыми */
+img,
+video {
+  display: block;
+  max-width: 100%;                       /* Не выходят за границы контейнера */
+  height: auto;                          /* Автоматическая высота для пропорций */
+}
+
+/* ФОРМЫ И КНОПКИ
+   Наследуют шрифт от родителя */
+input,
+textarea,
+select,
+button {
+  font: inherit;
+}
+
+/* HTML (корневой элемент)
+   Устанавливаем полную высоту */
+html {
+  height: 100%;
+  scrollbar-gutter: stable;               /* Резервируем место для скроллбара */
+}
+
+/* ПЛАВНАЯ ПРОКРУТКА
+   При клике на якорь (ссылка с #) прокрутка происходит плавно */
+html,
+:has(:target) {
+  scroll-behavior: smooth;
+}
+
+/* BODY
+   Минимальная высота 100%, правильная высота строк */
+body {
+  min-height: 100%;
+  line-height: 1.5;
+}
+
+/* ССЫЛКИ
+   Ссылки с классом отображаются как inline-flex */
+a:where([class]) {
+  display: inline-flex;
+}
+
+/* КНОПКИ И LABELS
+   Курсор меняется на "pointer" при наведении */
+button,
+label {
+  cursor: pointer;
+}
+
+/* SVG ИКОНКИ
+   SVG элементы наследуют цвет текста для fill и stroke */
+:where([fill]:not([fill='none'], [fill^='url'])) {
+  fill: currentColor;
+}
+
+:where([stroke]:not([stroke='none'], [stroke^='url'])) {
+  stroke: currentColor;
+}
+
+/* ПЕРЕХОДЫ В SVG
+   Все SVG элементы имеют переход для fill и stroke */
+svg * {
+  transition-property: fill, stroke;
+}
+
+/* ТАБЛИЦЫ
+   Стили для таблиц */
+:where(table) {
+  border-collapse: collapse;
+  border-color: currentColor;
+}
+
+/* ============================================================
+ДОСТУПНОСТЬ: СОКРАЩЕНИЕ ДВИЖЕНИЙ
+При включении в ОС "Уменьшить движения" отключаем анимации
+============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;      /* Почти мгновенные анимации */
+    animation-iteration-count: 1 !important;    /* Один раз */
+    transition-duration: 0.01ms !important;     /* Почти мгновенные переходы */
+    scroll-behavior: auto !important;           /* Обычная прокрутка (не плавная) */
+  }
+}
+
+/* ============================================================
+КЛАСС ДЛЯ СКРЫТИЯ ЭЛЕМЕНТОВ (доступность)
+Скрывает элемент визуально, но он остаётся доступным для скринридеров
+Используется для скрытого текста ссылок и кнопок
+============================================================ */
+.visually-hidden {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+.visually-hidden {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
