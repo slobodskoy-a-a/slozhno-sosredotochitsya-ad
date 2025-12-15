@@ -1,0 +1,53 @@
+/*
+  Специально для тёмной темы при наличии класса,
+  здесь окажутся стили, которые нужно переопределить принудительно,
+  переключая тему
+*/
+
+:root.theme-dark {
+  /* сохраните этот селектор в приведённом виде.
+    Так стили написанные ниже будут иметь больший вес,
+    чем стили в медиазапросе предпочтений пользователя
+  */
+  --text-color: #F1B2CE;
+  --accent-text-color: #DB00FF;
+  --bg-color: #000028;
+  --accent-bg-color: #FF0070;
+  --hover: rgb(255 0 112 / 0.4);
+}
+
+.theme-dark .page {
+  /* Вам также нужно будет написать ряд подобных селекторов */
+}
+
+.theme-dark .header__theme-menu-button_active {
+  border: 1px solid var(--accent-bg-color);
+  pointer-events: none;
+}
+
+.theme-dark .header__theme-menu-button:hover {
+  border: 1px solid var(--hover);
+}
+
+.header__theme-menu-button {
+  position: relative;
+}
+
+.theme-dark .header__theme-menu-button:focus-visible::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 100%;
+  height: 2px;
+  background-color: var(--accent-bg-color);
+  outline: none;
+}
+
+.theme-dark .link:focus-visible {
+  outline: 1px solid var(--text-color);
+}
+
+.theme-dark .link:hover {
+  border-bottom: 1px solid var(--text-color);
+}
