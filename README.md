@@ -1,1 +1,1 @@
-https://github.com/CyberArt2718281/slozhno-sosredotochitsya
+https://github.com/slobodskoy-a-a/slozhno-sosredotochitsya
